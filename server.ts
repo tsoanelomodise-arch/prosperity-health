@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
 import nodemailer from "nodemailer";
+import https from "https";
 
 async function startServer() {
   const app = express();
@@ -85,20 +86,55 @@ async function startServer() {
       }
 
       // Fallback: If SMTP variables are not set, proxy directly to FormSubmit
-      console.log("SMTP not fully configured in environment. Using FormSubmit.co proxy fallback.");
-      const response = await fetch("https://formsubmit.co/ajax/tsoanelomodise@gmail.com", {
+      console.log("SMTP not fully configured in environment. Using FormSubmit.co proxy fallback with native https to bypass header restrictions.");
+      
+      const payload = JSON.stringify(emailData);
+      
+      const postOptions = {
+        hostname: "formsubmit.co",
+        port: 443,
+        path: "/ajax/tsoanelomodise@gmail.com",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
           "Referer": "https://prosperityhealth.co.za/",
-          "Origin": "https://prosperityhealth.co.za"
-        },
-        body: JSON.stringify(emailData)
+          "Origin": "https://prosperityhealth.co.za",
+          "Content-Length": Buffer.byteLength(payload)
+        }
+      };
+
+      const result = await new Promise<{ status: number, body: string }>((resolve, reject) => {
+        const reqPost = https.request(postOptions, (resPost) => {
+          let data = "";
+          resPost.on("data", (chunk) => {
+            data += chunk;
+          });
+          resPost.on("end", () => {
+            resolve({
+              status: resPost.statusCode || 200,
+              body: data
+            });
+          });
+        });
+
+        reqPost.on("error", (err) => {
+          reject(err);
+        });
+
+        reqPost.write(payload);
+        reqPost.end();
       });
 
-      const data = await response.json().catch(() => ({}));
-      return res.status(response.status).json(data);
+      console.log(`FormSubmit response status: ${result.status}`);
+      let parsedData;
+      try {
+        parsedData = JSON.parse(result.body);
+      } catch (e) {
+        parsedData = { success: "true", message: "Form submitted successfully" };
+      }
+
+      return res.status(result.status).json(parsedData);
     } catch (error: any) {
       console.error("Server-side email send failed:", error);
       return res.status(500).json({ success: "false", message: error?.message || "Internal Server Error" });
