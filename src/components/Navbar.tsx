@@ -39,6 +39,13 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
     setServicesDropdown(false);
   };
 
+  const handleLogoClick = () => {
+    onNavigate("home");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsOpen(false);
+    setServicesDropdown(false);
+  };
+
   const isServiceActive = services.some((s) => s.id === currentPage);
 
   return (
@@ -53,7 +60,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <button
-            onClick={() => handleLinkClick("home")}
+            onClick={handleLogoClick}
             className="flex items-center gap-3 group text-left cursor-pointer focus:outline-none"
           >
             <div className="w-48 h-16 md:w-60 md:h-20 bg-white rounded-xl shadow-lg border border-primary/15 flex items-center justify-center p-2 transition-transform duration-200 group-hover:scale-105 overflow-hidden">
@@ -68,17 +75,6 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-2">
-            <button
-              onClick={() => handleLinkClick("home")}
-              className={`px-4 py-2 rounded-full font-medium text-[0.95rem] transition-all duration-300 cursor-pointer border ${
-                currentPage === "home"
-                  ? "text-white bg-primary-dark border-primary-dark font-semibold shadow-sm"
-                  : "text-white bg-primary border-primary/20 hover:bg-primary-dark hover:border-primary-dark shadow-sm hover:shadow"
-              }`}
-            >
-              Home
-            </button>
-
             <button
               onClick={() => handleLinkClick("meet-the-team")}
               className={`px-4 py-2 rounded-full font-medium text-[0.95rem] transition-all duration-300 cursor-pointer border ${
@@ -164,16 +160,6 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
         }`}
       >
         <div className="flex flex-col gap-1.5 mb-6">
-          <button
-            onClick={() => handleLinkClick("home")}
-            className={`w-full text-left px-5 py-3.5 rounded-xl font-semibold text-[1.1rem] transition-colors ${
-              currentPage === "home"
-                ? "bg-primary/10 text-primary"
-                : "text-text-light hover:bg-off-white"
-            }`}
-          >
-            Home
-          </button>
           <button
             onClick={() => handleLinkClick("meet-the-team")}
             className={`w-full text-left px-5 py-3.5 rounded-xl font-semibold text-[1.1rem] transition-colors ${

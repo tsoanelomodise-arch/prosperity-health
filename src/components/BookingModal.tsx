@@ -12,7 +12,8 @@ import {
   ArrowRight,
   MapPin,
   Compass,
-  ExternalLink
+  ExternalLink,
+  MessageSquare
 } from "lucide-react";
 import { servicesData } from "../data/services";
 
@@ -388,6 +389,36 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                         Meadowlands West Zone 6,<br />
                         Soweto, 1852
                       </p>
+
+                      <div className="mt-4 pt-4 border-t border-[#181C1A]/10 space-y-2.5">
+                        <div className="text-[10px] font-bold uppercase tracking-wider text-[#181C1A]/50">
+                          Direct Contact
+                        </div>
+                        <div className="flex items-center gap-3 text-[#181C1A]/85 text-[13px] font-medium">
+                          <div className="w-8 h-8 rounded-full bg-white/80 border border-white flex items-center justify-center text-primary shrink-0 shadow-sm">
+                            <Phone className="w-4 h-4" />
+                          </div>
+                          <a href="tel:+27101012499" className="hover:underline hover:text-primary transition-colors">
+                            010 101 2499
+                          </a>
+                        </div>
+                        <div className="flex items-center gap-3 text-[#181C1A]/85 text-[13px] font-medium">
+                          <div className="w-8 h-8 rounded-full bg-white/80 border border-white flex items-center justify-center text-emerald-600 shrink-0 shadow-sm">
+                            <MessageSquare className="w-4 h-4" />
+                          </div>
+                          <a href="https://wa.me/27672705995" target="_blank" rel="noreferrer" className="hover:underline hover:text-emerald-700 transition-colors">
+                            067 270 5995 (WhatsApp)
+                          </a>
+                        </div>
+                        <div className="flex items-center gap-3 text-[#181C1A]/85 text-[13px] font-medium">
+                          <div className="w-8 h-8 rounded-full bg-white/80 border border-white flex items-center justify-center text-primary shrink-0 shadow-sm">
+                            <Mail className="w-4 h-4" />
+                          </div>
+                          <a href="mailto:info@prosperityhealth.co.za" className="hover:underline hover:text-primary transition-colors break-all">
+                            info@prosperityhealth.co.za
+                          </a>
+                        </div>
+                      </div>
                     </div>
 
                     {/* Google Maps iFrame */}
