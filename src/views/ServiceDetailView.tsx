@@ -199,7 +199,7 @@ export default function ServiceDetailView({
                     onClick={() => setShowOverview(!showOverview)}
                     className="bg-white/80 backdrop-blur-sm border border-[#181C1A]/10 hover:bg-white text-[#181C1A] px-7 py-3.5 rounded-full font-medium shadow-sm hover:shadow transition-all flex items-center justify-center gap-3 text-sm w-fit"
                   >
-                    {showOverview ? "Hide Overview" : "Overview"}
+                    {showOverview ? "Hide Info" : "Click for More Info"}
                   </button>
                 </div>
 
