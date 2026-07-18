@@ -68,6 +68,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
           "Service Required": service,
           Message: message || "No message provided",
           _subject: `New Booking Request: ${firstName} ${lastName} - ${service}`,
+          _cc: "pharmacy@prosperityhealth.co.za",
           _captcha: "false"
         })
       });

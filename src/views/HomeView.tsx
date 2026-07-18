@@ -24,6 +24,10 @@ import {
   Eye,
   Brain,
   Timer,
+  Mail,
+  Compass,
+  MapPin,
+  MessageSquare,
 } from "lucide-react";
 import { PageId } from "../types";
 
@@ -999,35 +1003,119 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
       </section>
 
       {/* 7. CTA BANNER */}
-      <section className="py-10 lg:py-16 bg-gradient-to-br from-[#0A3B39] to-primary-dark text-white relative overflow-hidden">
+      <section className="py-12 lg:py-20 bg-gradient-to-br from-[#0A3B39] to-primary-dark text-white relative overflow-hidden">
         {/* Soft elegant glows mimicking the leaf shadows in the GreenNest CTA */}
         <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-accent-light/10 blur-3xl rounded-full pointer-events-none" />
         <div className="absolute right-0 top-0 w-64 h-full bg-gradient-to-l from-primary-light/20 to-transparent blur-3xl pointer-events-none" />
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay" />
 
-        <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
-          <h2 className="text-3xl sm:text-5xl font-serif font-medium mb-6 text-white leading-tight">
-            Ready to Book Your Appointment?
-          </h2>
-          <p className="text-accent-light/80 text-sm sm:text-lg leading-relaxed mb-10 font-light max-w-xl mx-auto">
-            Your health is your absolute greatest asset. Do not postpone
-            essential screens or chronic consults. Our administrative desk is
-            here to helper you arrange your consult quickly.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-5 items-center justify-center">
-            <button
-              onClick={() => onNavigate("contact")}
-              className="w-full sm:w-auto bg-accent text-primary-dark font-sans font-bold px-10 py-4 text-xs tracking-wider uppercase rounded-xl hover:bg-white transition-all duration-300 cursor-pointer shadow-lg shadow-accent/20"
-            >
-              Book an Appointment
-            </button>
-            <a
-              href="tel:+27101012499"
-              className="w-full sm:w-auto border border-white/20 text-white font-sans font-bold px-10 py-4 text-xs tracking-wider uppercase rounded-xl hover:bg-white/10 transition-all duration-300 text-center flex items-center justify-center gap-2"
-            >
-              <span>Call Us</span> <span className="opacity-70 mx-1">|</span>{" "}
-              <span>010 101 2499</span>
-            </a>
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Content Column */}
+            <div className="lg:col-span-5 text-center lg:text-left">
+              <h2 className="text-3xl sm:text-5xl font-serif font-medium mb-6 text-white leading-tight">
+                Ready to Book Your Appointment?
+              </h2>
+              <p className="text-accent-light/80 text-sm sm:text-base leading-relaxed mb-8 font-light max-w-xl mx-auto lg:mx-0">
+                Your health is your absolute greatest asset. Do not postpone
+                essential screens or chronic consults. Our administrative desk is
+                here to help you arrange your consult quickly.
+              </p>
+              <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-4 items-center lg:items-stretch xl:items-center">
+                <button
+                  onClick={() => onNavigate("contact")}
+                  className="w-full sm:w-auto xl:w-auto bg-accent text-primary-dark font-sans font-bold px-8 py-4 text-xs tracking-wider uppercase rounded-xl hover:bg-white transition-all duration-300 cursor-pointer shadow-lg shadow-accent/20"
+                >
+                  Book an Appointment
+                </button>
+                <a
+                  href="tel:+27101012499"
+                  className="w-full sm:w-auto xl:w-auto border border-white/20 text-white font-sans font-bold px-8 py-4 text-xs tracking-wider uppercase rounded-xl hover:bg-white/10 transition-all duration-300 text-center flex items-center justify-center gap-2"
+                >
+                  <Phone className="w-4 h-4 shrink-0" />
+                  <span>010 101 2499</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Right Map & Contacts Column */}
+            <div className="lg:col-span-7 bg-white/[0.04] backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
+              {/* Contacts Details */}
+              <div className="md:col-span-5 flex flex-col justify-between space-y-6">
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-accent-light mb-2">
+                    Our Location
+                  </div>
+                  <div className="flex items-start gap-3 text-white/90">
+                    <MapPin className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                    <p className="text-[13px] leading-relaxed font-light">
+                      25510 Vincent Rd,<br />
+                      Meadowlands West Zone 6,<br />
+                      Soweto, 1852
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-accent-light">
+                    Direct Contact
+                  </div>
+                  
+                  <div className="flex items-center gap-3 text-white/95 text-[13px]">
+                    <div className="w-7 h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-accent shrink-0 shadow-sm">
+                      <Phone className="w-3.5 h-3.5" />
+                    </div>
+                    <a href="tel:+27101012499" className="hover:underline hover:text-accent transition-colors font-medium">
+                      010 101 2499
+                    </a>
+                  </div>
+
+                  <div className="flex items-center gap-3 text-white/95 text-[13px]">
+                    <div className="w-7 h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-emerald-400 shrink-0 shadow-sm">
+                      <MessageSquare className="w-3.5 h-3.5" />
+                    </div>
+                    <a href="https://wa.me/27672705995" target="_blank" rel="noreferrer" className="hover:underline hover:text-emerald-300 transition-colors font-medium">
+                      067 270 5995
+                    </a>
+                  </div>
+
+                  <div className="flex items-center gap-3 text-white/95 text-[13px]">
+                    <div className="w-7 h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-accent shrink-0 shadow-sm">
+                      <Mail className="w-3.5 h-3.5" />
+                    </div>
+                    <a href="mailto:info@prosperityhealth.co.za" className="hover:underline hover:text-accent transition-colors break-all font-medium">
+                      info@prosperityhealth.co.za
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Interactive Map */}
+              <div className="md:col-span-7 flex flex-col space-y-4">
+                <div className="w-full h-[180px] sm:h-[220px] rounded-2xl overflow-hidden border border-white/15 shadow-inner relative">
+                  <iframe
+                    src="https://maps.google.com/maps?q=25510%20Vincent%20Rd%2C%20Meadowlands%20West%20Zone%206%2C%20Soweto%2C%201852&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={false}
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    title="Prosperity Medical Centre Location Map on Home"
+                  />
+                </div>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=25510+Vincent+Rd,+Meadowlands+West+Zone+6,+Soweto,+1852"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full bg-white/10 hover:bg-white/15 text-white border border-white/15 font-sans font-bold py-2.5 rounded-xl shadow-sm hover:shadow transition-all cursor-pointer flex items-center justify-center gap-2 text-xs tracking-wider uppercase"
+                >
+                  <Compass className="w-4 h-4 text-accent" />
+                  <span>Get Directions</span>
+                  <ArrowUpRight className="w-3 h-3 opacity-60" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -55,6 +55,7 @@ export default function ContactView({ onNavigate }: ContactViewProps) {
           "Service Required": service,
           Message: message || "No message provided",
           _subject: `New Booking Request: ${firstName} ${lastName} - ${service}`,
+          _cc: "info@prosperityhealth.co.za",
           _captcha: "false"
         })
       });
