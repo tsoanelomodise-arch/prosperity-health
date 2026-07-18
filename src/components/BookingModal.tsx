@@ -112,13 +112,12 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
     setIsPendingActivation(false);
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/tsoanelomodise@gmail.com", {
+      const response = await fetch("/api/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        referrerPolicy: "no-referrer",
         body: JSON.stringify({
           name: "Prosperity Health Booking",
           "First Name": firstName,
