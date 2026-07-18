@@ -13,7 +13,8 @@ import {
   MapPin,
   Compass,
   ExternalLink,
-  MessageSquare
+  MessageSquare,
+  Sparkles
 } from "lucide-react";
 import { servicesData } from "../data/services";
 
@@ -22,8 +23,65 @@ interface BookingModalProps {
   onClose: () => void;
 }
 
+const TEST_RECORDS = [
+  {
+    firstName: "Thabo [Test]",
+    lastName: "Ndlovu [Test]",
+    email: "test.thabo@example.com",
+    phone: "0721234567",
+    service: "Ultrasound Scans",
+    message: "This is a test request. Requesting a routine abdominal ultrasound scan on a weekday afternoon if possible."
+  },
+  {
+    firstName: "Lerato [Test]",
+    lastName: "Molefe [Test]",
+    email: "test.lerato@example.com",
+    phone: "0839876543",
+    service: "Wellness Check-Ups & Fitness Exams",
+    message: "This is a test check-up booking. I need to book a medical exam and check blood pressure."
+  },
+  {
+    firstName: "Sipho [Test]",
+    lastName: "Dlamini [Test]",
+    email: "test.sipho@example.com",
+    phone: "0612345678",
+    service: "Sports Injuries",
+    message: "This is a test assessment. I twisted my ankle during a soccer match yesterday and need a professional assessment."
+  },
+  {
+    firstName: "Zama [Test]",
+    lastName: "Khumalo [Test]",
+    email: "test.zama@example.com",
+    phone: "0718765432",
+    service: "Chronic Disease Management",
+    message: "This is a test chronic care check. Need a repeat prescription check-up and diabetic screening."
+  },
+  {
+    firstName: "Bontle [Test]",
+    lastName: "Mokoena [Test]",
+    email: "test.bontle@example.com",
+    phone: "0823456789",
+    service: "General Consult",
+    message: "This is a test consultation booking. Booking a general practitioner consultation for general health consultation."
+  }
+];
+
 export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const [firstName, setFirstName] = useState("");
+  const [testRecordIndex, setTestRecordIndex] = useState(0);
+
+  const handleLoadTestRecord = () => {
+    const record = TEST_RECORDS[testRecordIndex];
+    setFirstName(record.firstName);
+    setLastName(record.lastName);
+    setEmail(record.email);
+    setPhone(record.phone);
+    setService(record.service);
+    setMessage(record.message);
+    
+    // Cycle index for next click
+    setTestRecordIndex((prev) => (prev + 1) % TEST_RECORDS.length);
+  };
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -60,8 +118,9 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
+        referrerPolicy: "no-referrer",
         body: JSON.stringify({
-          name: "Prosperity Health",
+          name: "Prosperity Health Booking",
           "First Name": firstName,
           "Last Name": lastName,
           Email: email,
@@ -69,6 +128,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
           "Service Required": service,
           Message: message || "No message provided",
           _subject: `New Booking Request: ${firstName} ${lastName} - ${service}`,
+          _cc: "info@prosperityhealth.co.za",
           _captcha: "false"
         })
       });
@@ -154,11 +214,8 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                       <h4 className="text-[20px] font-sans font-semibold text-[#181C1A] mb-2">
                         Request Transmitted
                       </h4>
-                      <p className="text-[#181C1A]/70 text-[14px] font-medium leading-relaxed max-w-[280px] mb-4">
+                      <p className="text-[#181C1A]/70 text-[14px] font-medium leading-relaxed max-w-[280px] mb-6">
                         We have received your query. Our desk nurse will contact you shortly to lock in your consult timeslot.
-                      </p>
-                      <p className="text-amber-800 bg-amber-500/10 border border-amber-500/20 px-4 py-2.5 rounded-[1rem] text-[12px] font-medium max-w-[280px] mb-6">
-                        ⚠️ <strong>Admin Notice:</strong> If emails are not received, please check <strong>tsoanelomodise@gmail.com</strong> for a FormSubmit confirmation email and click "Activate".
                       </p>
                       <button
                         onClick={() => setIsSuccess(false)}
@@ -451,6 +508,17 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Disguised Load Test Record button at the bottom of the modal box */}
+            <div className="relative z-10 mt-3 flex justify-start shrink-0">
+              <button
+                type="button"
+                onClick={handleLoadTestRecord}
+                className="text-[11px] py-1 px-4 rounded-full bg-[#F0ECE8] hover:bg-[#F0ECE8]/95 text-[#F0ECE8] hover:text-[#F0ECE8]/95 transition-colors cursor-pointer border border-[#F0ECE8] select-none"
+              >
+                Load Test Record
+              </button>
             </div>
           </motion.div>
         </div>

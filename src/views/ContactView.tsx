@@ -47,6 +47,7 @@ export default function ContactView({ onNavigate }: ContactViewProps) {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
+        referrerPolicy: "no-referrer",
         body: JSON.stringify({
           "First Name": firstName,
           "Last Name": lastName,
@@ -153,11 +154,8 @@ export default function ContactView({ onNavigate }: ContactViewProps) {
                       <h4 className="text-[20px] font-sans font-semibold text-[#181C1A] mb-2">
                         Request Transmitted
                       </h4>
-                      <p className="text-[#181C1A]/70 text-[14px] font-medium leading-relaxed max-w-[280px] mb-4">
+                      <p className="text-[#181C1A]/70 text-[14px] font-medium leading-relaxed max-w-[280px] mb-6">
                         We have received your query. Our desk nurse will contact you shortly to lock in your consult timeslot.
-                      </p>
-                      <p className="text-amber-800 bg-amber-500/10 border border-amber-500/20 px-4 py-2.5 rounded-[1rem] text-[12px] font-medium max-w-[280px] mb-6">
-                        ⚠️ <strong>Admin Notice:</strong> If emails are not received, please check <strong>tsoanelomodise@gmail.com</strong> for a FormSubmit confirmation email and click "Activate".
                       </p>
                       <button
                         onClick={() => setIsSuccess(false)}
