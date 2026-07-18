@@ -61,6 +61,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
           "Accept": "application/json"
         },
         body: JSON.stringify({
+          name: "Prosperity Health",
           "First Name": firstName,
           "Last Name": lastName,
           Email: email,
@@ -68,7 +69,6 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
           "Service Required": service,
           Message: message || "No message provided",
           _subject: `New Booking Request: ${firstName} ${lastName} - ${service}`,
-          _cc: "pharmacy@prosperityhealth.co.za",
           _captcha: "false"
         })
       });
